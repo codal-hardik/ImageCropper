@@ -29,7 +29,7 @@ public class ImageCropperViewController: UIViewController {
 
   //MARK: Private properties & IBOutlets
     @IBOutlet fileprivate weak var imgCropping: UIImageView!
-    @IBOutlet weak var labelTitle: UIView!
+    @IBOutlet weak var labelTitle: UILabel!
     @IBOutlet fileprivate weak var mask: UIView!
   @IBOutlet fileprivate weak var grid: UIView!
   @IBOutlet fileprivate weak var btnDone: UIButton!
@@ -125,7 +125,12 @@ extension ImageCropperViewController {
 
 //MARK: - ImageCropperView
 
-extension ImageCropperViewController: ImageCropperView {
+extension ImageCropperViewController: ImageCropperView
+{
+    func setTopTitle(_ title: String?) {
+        labelTitle.text = title
+    }
+    
   
   func set(_ image: UIImage) {
     imgCropping.image = image

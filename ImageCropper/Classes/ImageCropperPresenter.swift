@@ -20,6 +20,7 @@ protocol ImageCropperView: class {
   func drawAnotherBorder(by path: CGPath, with strokeColor: CGColor)
   func drawGrid(with lines: [CGPath], with strokeColor: CGColor)
   
+  func setTopTitle(_ title: String?)
   func setDone(_ title: String?)
   func setCancel(_ title: String?)
   func showBottomButtons(_ show: Bool)
@@ -68,7 +69,7 @@ protocol ImageCropperModel {
   
   var doneTitle: String? { get }
   var cancelTitle: String? { get }
-  
+  var topTitle: String? { get }
   var backTitle: String? { get }
   var backImage: UIImage? { get }
   var backTintColor: UIColor? { get }
@@ -121,7 +122,7 @@ extension ImageCropperPresenterImplementation: ImageCropperPresenter {
     view?.drawGrid(with: model.grid, with: model.gridColor)
     view?.setDone(model.doneTitle)
     view?.setCancel(model.cancelTitle)
-    
+    view?.setTopTitle(model.topTitle)
     view?.setBackButton(title: model.backTitle, image: model.backImage, tintColor: model.backTintColor)
   }
   

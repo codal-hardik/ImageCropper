@@ -49,10 +49,11 @@ extension MainRouterImplementation: MainRouter {
     if figure == .customRect {
       config.customRatio = CGSize(width: 6, height: 5)
     }
-    
+    config.topTitle = "Upload Certificate"
     if figure == .circle
     {
       config.anotherBorderColor = UIColor.clear//this is for hide corners
+      config.topTitle = "Upload Profile"
     }
     config.backTintColor = .black
     config.backTitle = ""
