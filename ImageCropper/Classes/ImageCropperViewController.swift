@@ -10,7 +10,7 @@
 import UIKit
 
 public class ImageCropperViewController: UIViewController {
-  //MARK: Static initializer
+    //MARK: Static initializer
   static public func initialize(with configuration:ImageCropperConfiguration, completionHandler: @escaping ImageCropperCompletion) -> ImageCropperViewController {
     let cropper = ImageCropperViewController(nibName: "ImageCropper", bundle: Bundle(for: self.classForCoder()))
     ImageCropperConfiguratorImplementation.configure(for: cropper, with: configuration, completionHandler: completionHandler)
@@ -28,14 +28,13 @@ public class ImageCropperViewController: UIViewController {
   
 
   //MARK: Private properties & IBOutlets
-    @IBOutlet fileprivate weak var imgCropping: UIImageView!
-    @IBOutlet weak var labelTitle: UILabel!
-    @IBOutlet fileprivate weak var mask: UIView!
+  @IBOutlet fileprivate weak var imgCropping: UIImageView!
+  @IBOutlet fileprivate weak var mask: UIView!
   @IBOutlet fileprivate weak var grid: UIView!
   @IBOutlet fileprivate weak var btnDone: UIButton!
   @IBOutlet fileprivate weak var btnCancel: UIButton!
   @IBOutlet fileprivate weak var bottomBar: UIView!
-  
+  @IBOutlet weak var labelTitle: UILabel!
   @IBOutlet fileprivate weak var activityView: UIView!
   @IBOutlet fileprivate weak var activity: UIActivityIndicatorView!
   
@@ -125,12 +124,7 @@ extension ImageCropperViewController {
 
 //MARK: - ImageCropperView
 
-extension ImageCropperViewController: ImageCropperView
-{
-    func setTopTitle(_ title: String?) {
-        labelTitle.text = title
-    }
-    
+extension ImageCropperViewController: ImageCropperView {    
   
   func set(_ image: UIImage) {
     imgCropping.image = image
@@ -163,25 +157,12 @@ extension ImageCropperViewController: ImageCropperView
     mask.backgroundColor = fillColor
   }
   
-    //@function drawAnotherMask
-    //@abstract this is to draw another mask
-    
-    func drawAnotherMask(by path: CGPath, with fillColor: UIColor) {
-        let hole = CAShapeLayer()
-        hole.frame = mask.bounds
-        hole.path = path
-        //    hole.fillColor = fillColor
-        hole.fillRule = kCAFillRuleEvenOdd
-        mask.layer.mask = hole
-        mask.backgroundColor = fillColor
-    }
-    
   func clearBorderAndGrid() {
     grid.layer.sublayers?.forEach({ (sublayer) in
       sublayer.removeFromSuperlayer()
     })
   }
-  
+
     func drawBorber(by path: CGPath, with strokeColor: CGColor,lineWidth  : CGFloat) {
         let border = CAShapeLayer()
         border.frame = grid.bounds
@@ -190,7 +171,7 @@ extension ImageCropperViewController: ImageCropperView
         border.strokeColor = strokeColor
         border.lineWidth = lineWidth
         grid.layer.addSublayer(border)
-  }
+    }
     
     //This is for create lines on the sides
     func drawAnotherBorder(by path: CGPath, with strokeColor: CGColor){
@@ -203,6 +184,17 @@ extension ImageCropperViewController: ImageCropperView
         grid.layer.addSublayer(border)
     }
     
+
+//  func drawBorber(by path: CGPath, with strokeColor: CGColor) {
+//    let border = CAShapeLayer()
+//    border.frame = grid.bounds
+//    border.path = path
+//    border.fillColor = UIColor.clear.cgColor
+//    border.strokeColor = strokeColor
+//    border.lineWidth = 4
+//    grid.layer.addSublayer(border)
+//  }
+  
   func drawGrid(with lines: [CGPath], with strokeColor: CGColor) {
     lines.forEach { line in
       let lineLayer = CAShapeLayer()
@@ -268,31 +260,3 @@ extension ImageCropperViewController: ImageCropperView
   
 }
 
-extension CALayer {
-    
-    func addBorder(edge: UIRectEdge, color: UIColor, thickness: CGFloat) {
-        
-        let border = CALayer()
-        
-        switch edge {
-        case .top:
-            border.frame = CGRect(x: 0, y: 0, width: self.frame.height - thickness, height: thickness)
-            break
-        case .bottom:
-            border.frame = CGRect(x: 0, y: self.frame.height - thickness, width: self.frame.width, height: thickness)
-            break
-        case .left:
-            border.frame = CGRect(x: 0, y: 0, width: thickness, height: self.frame.height)
-            break
-        case .right:
-            border.frame = CGRect(x: self.frame.width - thickness, y: 0, width: thickness, height: self.frame.height)
-            break
-        default:
-            break
-        }
-        
-        border.backgroundColor = color.cgColor;
-        
-        addSublayer(border)
-    }
-}

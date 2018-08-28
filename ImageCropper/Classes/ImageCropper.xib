@@ -17,7 +17,7 @@
                 <outlet property="btnDone" destination="0j0-Zj-OEJ" id="Ziv-i0-RfL"/>
                 <outlet property="grid" destination="Kte-m8-dND" id="bFZ-vs-SWC"/>
                 <outlet property="imgCropping" destination="r4q-OB-pAh" id="pBW-VR-81s"/>
-                <outlet property="labelTitle" destination="eYe-aO-r9H" id="uwf-Bd-QYE"/>
+                <outlet property="labelTitle" destination="eYe-aO-r9H" id="HuN-ds-B6P"/>
                 <outlet property="mask" destination="exc-01-ERC" id="W21-Bd-yZm"/>
                 <outlet property="view" destination="x8u-Y6-sc7" id="KOL-LN-PDP"/>
             </connections>
