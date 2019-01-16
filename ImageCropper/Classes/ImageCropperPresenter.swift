@@ -28,6 +28,8 @@ protocol ImageCropperView: class {
   func setBackButton(title: String?, image: UIImage?, tintColor: UIColor?)
   
   func activityIndicator(_ show: Bool)
+    
+  func setTopTitle(_ title : String?)
 }
 
 protocol ImageCropperPresenter {
@@ -39,7 +41,7 @@ protocol ImageCropperPresenter {
   func didDrag(to location: CGPoint)
   func didScale(with scale: CGFloat)
   func centerImage()
-  
+  func toptitle()
   func crop()
   func cancel()
 }
@@ -105,6 +107,10 @@ class ImageCropperPresenterImplementation {
 
 extension ImageCropperPresenterImplementation: ImageCropperPresenter {
 
+    func toptitle() {
+        view?.setTopTitle(model.topTitle ?? "Upload")
+    }
+    
   func viewDidLoad() {
     view?.set(model.image)
   }
@@ -123,7 +129,7 @@ extension ImageCropperPresenterImplementation: ImageCropperPresenter {
     view?.drawGrid(with: model.grid, with: model.gridColor)
     view?.setDone(model.doneTitle)
     view?.setCancel(model.cancelTitle)
-    
+    view?.setTopTitle(model.topTitle ?? "Select")
     view?.setBackButton(title: model.backTitle, image: model.backImage, tintColor: model.backTintColor)
   }
   

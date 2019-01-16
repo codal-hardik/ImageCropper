@@ -74,6 +74,7 @@ extension MainPresenterImplementation: MainPresenter {
       router.showAlertNoImage()
       return
     }
+    
     router.openCropper(with: figure, image: img)
   }
 }

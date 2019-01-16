@@ -124,7 +124,13 @@ extension ImageCropperViewController {
 
 //MARK: - ImageCropperView
 
-extension ImageCropperViewController: ImageCropperView {    
+extension ImageCropperViewController: ImageCropperView {
+    
+    func setTopTitle(_ title: String?) {
+        guard let t = title else { return }
+        labelTitle.text = t
+    }
+    
   
   func set(_ image: UIImage) {
     imgCropping.image = image
