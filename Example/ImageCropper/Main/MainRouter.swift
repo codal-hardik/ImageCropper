@@ -57,6 +57,7 @@ extension MainRouterImplementation: MainRouter {
     }
     config.backTintColor = .black
     config.backTitle = ""
+    config.doneTitle = "UPLOAD"
     
     var croppedImage = img
     let cropper = ImageCropperViewController.initialize(with: config, completionHandler: { _croppedImage in
